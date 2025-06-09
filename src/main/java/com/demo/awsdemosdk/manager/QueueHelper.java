@@ -56,7 +56,7 @@ class QueueHelper {
         return responseEntity.getStatusCode().is2xxSuccessful();
     }
 
-    public List<Message> acknowledgeMessages(PollMessageRequest request, String token, SqsQueue queue) {
+    public List<Message> pollMessages(PollMessageRequest request, String token, SqsQueue queue) {
         String loginUrl = "http://" + queue.getHost() + ":" + queue.getPort() + "/v1/sqs/poll-messages";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -65,7 +65,7 @@ class QueueHelper {
 
         ResponseEntity<List<Message>> responseEntity = restTemplate.exchange(
                 loginUrl,
-                HttpMethod.GET,
+                HttpMethod.POST,
                 requestEntity,
                 new ParameterizedTypeReference<>() {
                 }
