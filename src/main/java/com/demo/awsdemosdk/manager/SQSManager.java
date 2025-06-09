@@ -43,7 +43,7 @@ public class SQSManager implements QueueManager {
                 .queueName(sqsQueue.getQueueName())
                 .limit(limit)
                 .build();
-        return queueHelper.acknowledgeMessages(request, token, sqsQueue);
+        return queueHelper.pollMessages(request, token, sqsQueue);
     }
 
     @Override
